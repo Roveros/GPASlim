@@ -81,8 +81,9 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            Toast.makeText(MainActivity.this, "Settings", Toast.LENGTH_LONG).show();
-
+           // Toast.makeText(MainActivity.this, "Settings", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(this, OptionActivity.class);
+            startActivity(intent);
         } else if (id == R.id.action_exit) {
             onExitClick();
         } else if (id == R.id.action_email) {
