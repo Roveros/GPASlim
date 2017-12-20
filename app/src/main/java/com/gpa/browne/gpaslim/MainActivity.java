@@ -108,6 +108,9 @@ public class MainActivity extends AppCompatActivity {
 
     //Exits tha application
     public void onExitClick() {
+        if(timer.isRunning()){
+            timer.stop();
+        }
         finish();
         System.exit(0);
     }

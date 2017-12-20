@@ -65,6 +65,7 @@
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
@@ -73,9 +74,11 @@
         android:minHeight="50dp"
         android:minWidth="200dp"
         android:progress="1"
+        app:layout_constraintBottom_toTopOf="@+id/tvCounterDisplay"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvTimerDisplay"
+        app:layout_constraintVertical_bias="0.084"
         tools:layout_constraintLeft_creator="1"
         tools:layout_constraintRight_creator="1"
         tools:layout_constraintTop_creator="1" />/>
@@ -102,7 +105,8 @@
         android:id="@+id/tvStopDisplay"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:layout_marginEnd="48dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="40dp"
         android:background="@drawable/circle"
         android:gravity="center"
@@ -111,6 +115,7 @@
         android:textAlignment="center"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvStartDisplay"
         app:layout_constraintTop_toBottomOf="@+id/progressBar" />
 
     <TextView
@@ -118,16 +123,16 @@
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginBottom="8dp"
-        android:layout_marginStart="160dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
         android:background="@drawable/circle"
         android:gravity="center"
         android:text="0"
         android:textAlignment="center"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvStartDisplay"
-        app:layout_constraintVertical_bias="0.733" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </android.support.constraint.ConstraintLayout>
