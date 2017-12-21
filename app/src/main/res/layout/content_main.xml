@@ -19,7 +19,7 @@
         android:inputType="textPersonName"
         android:selectAllOnFocus="false"
         android:textAlignment="center"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@android:color/background_light"
         android:textColorHighlight="@color/colorAccent"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
