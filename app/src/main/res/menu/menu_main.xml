@@ -15,6 +15,12 @@
         app:showAsAction="never" />
 
     <item
+        android:id="@+id/action_select_topic"
+        android:orderInCategory="100"
+        android:title="@string/action_select_topic"
+        app:showAsAction="never" />
+
+    <item
         android:id="@+id/action_email"
         android:orderInCategory="100"
         android:title="@string/action_email"
