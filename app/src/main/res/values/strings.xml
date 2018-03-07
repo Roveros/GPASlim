@@ -82,4 +82,5 @@
 
     <string name="pref_title_vibrate">Vibrate</string>
     <string name="title_activity_option">OptionActivity</string>
+    <string name="action_select_topic">Select Topic</string>
 </resources>

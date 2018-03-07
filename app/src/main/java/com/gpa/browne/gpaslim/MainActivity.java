@@ -103,6 +103,7 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+<<<<<<< HEAD
             // Toast.makeText(MainActivity.this, "Settings", Toast.LENGTH_LONG).show();
             config = new GPAConfigModel(this);
             Intent intent = new Intent(this, SettingsActivity.class);
@@ -110,6 +111,11 @@ public class MainActivity extends AppCompatActivity {
             intent.putExtra("longBreakLength", config.getLongBreakLength());
             intent.putExtra("pomLength", config.getPomLength());
             startActivity(intent);
+=======
+/*           // Toast.makeText(MainActivity.this, "Settings", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(this, OptionActivity.class);
+            startActivity(intent);*/
+>>>>>>> 7aee3e36f92007053e3d50353df1b21416e50fe7
         } else if (id == R.id.action_exit) {
             onExitClick();
         } else if (id == R.id.action_email) {
@@ -121,6 +127,7 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+<<<<<<< HEAD
 
     private void displayTopics() {
         File myMainDir = getDir("logs", Context.MODE_PRIVATE);
@@ -155,6 +162,37 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "No topics detected", Toast.LENGTH_SHORT).show();
         }
 
+=======
+    private void displayTopics() {
+        AlertDialog.Builder b = new AlertDialog.Builder(this);
+        b.setTitle("Choose Topic");
+
+        final StringBuilder sb = new StringBuilder();
+        File myMainDir = getDir("logs", Context.MODE_PRIVATE);
+        File[] files = myMainDir.listFiles();
+        for (File inFile : files) {
+            if (inFile.isDirectory()) {
+                Log.i("INFO", inFile.getName());
+                sb.append(inFile.getName()+"\n");
+            }
+        }
+        sb.append("Exit");
+        final String[] types = sb.toString().split("\\n");
+
+        b.setItems(types, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                dialog.dismiss();
+                if(!types[which].equals("Exit")){
+                    etSessionTitle.setText(types[which]);
+                }
+
+            }
+        });
+
+        b.show();
+>>>>>>> 7aee3e36f92007053e3d50353df1b21416e50fe7
     }
 
     //Starts timer if not already started
