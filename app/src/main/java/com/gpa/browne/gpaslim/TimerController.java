@@ -51,102 +51,115 @@ class TimerController {
         tvCounterDisplay.setText(counter + "");
 
         this.etSessionTitle = etSessionTitle;
+
     }
 
     void start(final String type) {
-        String dir = "";
-
-        //if the contents of the edit text are not empty or null then set the directory
-        if (!TextUtils.isEmpty(etSessionTitle.getText().toString())) {
-            dir = etSessionTitle.getText().toString();
-        } else {
-            dir = "no dir";
-        }
-
-        //Generate a model for this pom
-        model = new TimerModel(context, type, dir);
-
-        if (type.equals("pom")) {
-            //model param to track timer state
+        if(!isRunning()){
             running = true;
-            layout.setBackgroundColor(Color.parseColor("#ffcc0000"));
-            progressBar.getProgressDrawable().setColorFilter(
-                    Color.parseColor("#ff669900"), android.graphics.PorterDuff.Mode.SRC_IN);
+            String dir = "";
 
-            /*        millisinFuture = config.getPomLength() * 60000;     // 1000 = 1 second, 60000 = 60 seconds or 1 minute*/
-            millisinFuture = 25 * 60000; // 25 * 1 Minute
+            //if the contents of the edit text are not empty or null then set the directory
+            if (!TextUtils.isEmpty(etSessionTitle.getText().toString())) {
+                dir = etSessionTitle.getText().toString();
+            } else {
+                dir = "no dir";
+            }
 
-        } else if (type.equals("shortBreak")) {
-            //model param to track timer state
-            running = true;
-            layout.setBackgroundColor(Color.parseColor("#ff669900"));
-            progressBar.getProgressDrawable().setColorFilter(
-                    Color.parseColor("#a9a9a9"), android.graphics.PorterDuff.Mode.SRC_IN);
+            //Generate a model for this pom
+            model = new TimerModel(context, type, dir);
+            config = new GPAConfigModel(context);
 
-            /*millisinFuture = config.getShortBreakLength() * 60000;    // 1000 = 1 second, 60000 = 60 seconds or 1 minute*/
-            millisinFuture = 5 * 60000; // 5 * 1 Minute
+            if (type.equals("pom")) {
+                //model param to track timer state
+                running = true;
+                layout.setBackgroundColor(Color.parseColor("#ffcc0000"));
+                progressBar.getProgressDrawable().setColorFilter(
+                        Color.parseColor("#ff669900"), android.graphics.PorterDuff.Mode.SRC_IN);
 
-        } else if (type.equals("longBreak")) {
-            //model param to track timer state
-            running = true;
-            layout.setBackgroundColor(Color.parseColor("#ff669900"));
-            progressBar.getProgressDrawable().setColorFilter(
-                    Color.parseColor("#a9a9a9"), android.graphics.PorterDuff.Mode.SRC_IN);
-
-            //update counter and counter display
-            counter = 0;
-            tvCounterDisplay.setText(counter + "");
-
-            /*millisinFuture = config.getLongBreakLength() * 60000;     // 1000 = 1 second, 60000 = 60 seconds or 1 minute*/
-            millisinFuture = 15 * 60000; // 15 * 1 Minute
-        }
-
-        //set progress bar maximum = to the total number of miliseconds of the timer
-        progressBar.setMax(millisinFuture);
-
-
-        //if timer is running then start countdown
-        if (running) {
-            //param 1 and 2 in milliseconds, i.e. 30000 = 30 seconds
-            timer = new CountDownTimer(millisinFuture, countDownInterval) {
-
-                //for every tick
-                public void onTick(long millisUntilFinished) {
-                    tvTimerDisplay.setText(millisToTimerString(millisUntilFinished));
-
-                    progressBar.setProgress(millisinFuture - (int) millisUntilFinished);
+                //millisinFuture = 5000;     // 1000 = 1 second, 60000 = 60 seconds or 1 minute*/
+                millisinFuture = config.getPomLength() * 60000; // 25 * 1 Minute
+                if(etSessionTitle.getText().toString().equals("debug")){
+                    millisinFuture = 5000;     // 1000 = 1 second, 60000 = 60 seconds or 1 minute*/
                 }
 
-                //on timer finish
-                public void onFinish() {
-                    model.setEndTime();
-                    model.persist();
+            } else if (type.equals("shortBreak")) {
+                //model param to track timer state
+                running = true;
+                layout.setBackgroundColor(Color.parseColor("#ff669900"));
+                progressBar.getProgressDrawable().setColorFilter(
+                        Color.parseColor("#a9a9a9"), android.graphics.PorterDuff.Mode.SRC_IN);
 
-                    progressBar.setProgress(0);
+                //millisinFuture = 3000;     // 1000 = 1 second, 60000 = 60 seconds or 1 minute*/
+                millisinFuture = config.getShortBreakLength() * 60000; // 5 * 1 Minute
+                if(etSessionTitle.getText().toString().equals("debug")){
+                    millisinFuture = 3000;     // 1000 = 1 second, 60000 = 60 seconds or 1 minute*/
+                }
 
-                    //on finish calls an alert dialog as appropriate
-                    if (type.equals("pom")) {
-                        //update counter and counter display if session type == pom
-                        counter++;
-                        tvCounterDisplay.setText(counter + "");
+            } else if (type.equals("longBreak")) {
+                //model param to track timer state
+                running = true;
+                layout.setBackgroundColor(Color.parseColor("#ff669900"));
+                progressBar.getProgressDrawable().setColorFilter(
+                        Color.parseColor("#a9a9a9"), android.graphics.PorterDuff.Mode.SRC_IN);
 
-                        if (counter >= 4) {
-                            alertShowUserOptions("longBreak");
-                        } else {
-                            alertShowUserOptions("shortBreak");
-                        }
-                    } else {
-                        alertShowUserOptions("pom");
+                //update counter and counter display
+                counter = 0;
+                tvCounterDisplay.setText(counter + "");
+
+                //millisinFuture = 4000;     // 1000 = 1 second, 60000 = 60 seconds or 1 minute*/
+                if(etSessionTitle.getText().toString().equals("debug")){
+                    millisinFuture = 4000;     // 1000 = 1 second, 60000 = 60 seconds or 1 minute*/
+                }
+                millisinFuture = config.getLongBreakLength() * 60000; // 15 * 1 Minute
+            }
+
+            //set progress bar maximum = to the total number of miliseconds of the timer
+            progressBar.setMax(millisinFuture);
+
+
+            //if timer is running then start countdown
+            if (running) {
+                //param 1 and 2 in milliseconds, i.e. 30000 = 30 seconds
+                timer = new CountDownTimer(millisinFuture, countDownInterval) {
+
+                    //for every tick
+                    public void onTick(long millisUntilFinished) {
+                        tvTimerDisplay.setText(millisToTimerString(millisUntilFinished));
+
+                        progressBar.setProgress(millisinFuture - (int) millisUntilFinished);
                     }
 
-                    //update timer display
-                    tvTimerDisplay.setText(millisToTimerString(0));
-                    running = false;
-                }
-            }.start();
-        }
+                    //on timer finish
+                    public void onFinish() {
+                        model.setEndTime();
+                        model.persist();
+                        progressBar.setProgress(0);
 
-        //model param to track timer state
+                        //on finish calls an alert dialog as appropriate
+                        if (type.equals("pom")) {
+                            //update counter and counter display if session type == pom
+                            counter++;
+                            tvCounterDisplay.setText(counter + "");
+
+                            if (counter >= 4) {
+                                alertShowUserOptions("longBreak");
+                            } else {
+                                alertShowUserOptions("shortBreak");
+                            }
+                        } else {
+                            alertShowUserOptions("pom");
+                        }
+
+                        //update timer display
+                        tvTimerDisplay.setText(millisToTimerString(0));
+                        running = false;
+                    }
+                }.start();
+            }
+
+            //model param to track timer state
+        }
     }
 
     void stop() {
@@ -256,7 +269,7 @@ class TimerController {
                         }
                     });
         }
-       final AlertDialog alert = builder.show();
+        final AlertDialog alert = builder.show();
 
         // Auto end after 1 minute if no selection is made
         final Handler handler  = new Handler();
@@ -283,7 +296,7 @@ class TimerController {
             }
         });
 
-        handler.postDelayed(runnable, 60000); // 1 Minute
+        handler.postDelayed(runnable, 60000 * 5); // 1 Minute * 5
 
     }
 

@@ -90,13 +90,15 @@ public class TimerModel {
                 try {
 
                     File myMainDir = context.getDir("logs", Context.MODE_PRIVATE);
-                    //File myMainDir = new File(context.getFilesDir(), "logs");
+
+                    //  File myTopicDir = new File(myMainDir, dir);
+                    //  mySubDir.mkdir();
 
                     File mySubDir = new File(myMainDir, dir);
                     mySubDir.mkdir();
 
-                    //File myFinalDir = new File(mySubDir, fileName);
-                    File myFinalDir = new File(mySubDir, "debug.txt");
+                    File myFinalDir = new File(mySubDir, fileName);
+                    //File myFinalDir = new File(mySubDir, "debug.txt");
 
                     FileOutputStream out = new FileOutputStream(myFinalDir, true); //Use the stream as usual to write into the file
                     OutputStreamWriter outputWriter = new OutputStreamWriter(out);

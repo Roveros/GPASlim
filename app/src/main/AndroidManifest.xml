@@ -3,6 +3,7 @@
     package="com.gpa.browne.gpaslim">
 
     <uses-permission android:name="android.permission.VIBRATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -21,8 +22,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".OptionActivity"
-            android:label="@string/title_activity_option"
+            android:name=".SettingsActivity"
+            android:label="@string/title_activity_settings"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
