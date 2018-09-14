@@ -79,7 +79,7 @@ class TimerController {
 
                 //millisinFuture = 5000;     // 1000 = 1 second, 60000 = 60 seconds or 1 minute*/
                 millisinFuture = config.getPomLength() * 60000; // 25 * 1 Minute
-                if(etSessionTitle.getText().toString().equals("debug")){
+                if(etSessionTitle.getText().toString().equals("debug") || etSessionTitle.getText().toString().equals("Debug")){
                     millisinFuture = 5000;     // 1000 = 1 second, 60000 = 60 seconds or 1 minute*/
                 }
 
@@ -92,7 +92,7 @@ class TimerController {
 
                 //millisinFuture = 3000;     // 1000 = 1 second, 60000 = 60 seconds or 1 minute*/
                 millisinFuture = config.getShortBreakLength() * 60000; // 5 * 1 Minute
-                if(etSessionTitle.getText().toString().equals("debug")){
+                if(etSessionTitle.getText().toString().equals("debug") || etSessionTitle.getText().toString().equals("Debug")){
                     millisinFuture = 3000;     // 1000 = 1 second, 60000 = 60 seconds or 1 minute*/
                 }
 
@@ -108,13 +108,13 @@ class TimerController {
                 tvCounterDisplay.setText(counter + "");
 
                 //millisinFuture = 4000;     // 1000 = 1 second, 60000 = 60 seconds or 1 minute*/
-                if(etSessionTitle.getText().toString().equals("debug")){
+                if(etSessionTitle.getText().toString().equals("debug") || etSessionTitle.getText().toString().equals("Debug")){
                     millisinFuture = 4000;     // 1000 = 1 second, 60000 = 60 seconds or 1 minute*/
                 }
                 millisinFuture = config.getLongBreakLength() * 60000; // 15 * 1 Minute
             }
 
-            //set progress bar maximum = to the total number of miliseconds of the timer
+            //set progress bar maximum = to the total number of milliseconds of the timer
             progressBar.setMax(millisinFuture);
 
 

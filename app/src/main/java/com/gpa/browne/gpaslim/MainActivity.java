@@ -103,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-<<<<<<< HEAD
+
             // Toast.makeText(MainActivity.this, "Settings", Toast.LENGTH_LONG).show();
             config = new GPAConfigModel(this);
             Intent intent = new Intent(this, SettingsActivity.class);
@@ -111,29 +111,31 @@ public class MainActivity extends AppCompatActivity {
             intent.putExtra("longBreakLength", config.getLongBreakLength());
             intent.putExtra("pomLength", config.getPomLength());
             startActivity(intent);
-=======
+
 /*           // Toast.makeText(MainActivity.this, "Settings", Toast.LENGTH_LONG).show();
             Intent intent = new Intent(this, OptionActivity.class);
             startActivity(intent);*/
->>>>>>> 7aee3e36f92007053e3d50353df1b21416e50fe7
+
         } else if (id == R.id.action_exit) {
             onExitClick();
         } else if (id == R.id.action_email) {
             sendEmail();
         } else if (id == R.id.action_select_topic) {
-            displayTopics();
+            displayTopics("select");
+        } else if (id == R.id.action_delete_topic) {
+            displayTopics("delete");
         }
 
         return super.onOptionsItemSelected(item);
     }
 
-<<<<<<< HEAD
 
-    private void displayTopics() {
+
+    private void displayTopics(final String actionRequested) {
         File myMainDir = getDir("logs", Context.MODE_PRIVATE);
         File[] files = myMainDir.listFiles();
 
-        if(files.length != 0){
+        if (files.length != 0) {
             AlertDialog.Builder b = new AlertDialog.Builder(this);
             b.setTitle("Choose Topic");
 
@@ -141,7 +143,7 @@ public class MainActivity extends AppCompatActivity {
             for (File inFile : files) {
                 if (inFile.isDirectory()) {
                     Log.i("INFO", inFile.getName());
-                    sb.append(inFile.getName()+"\n");
+                    sb.append(inFile.getName() + "\n");
                 }
             }
             sb.append("Exit");
@@ -151,19 +153,34 @@ public class MainActivity extends AppCompatActivity {
                 public void onClick(DialogInterface dialog, int which) {
 
                     dialog.dismiss();
-                    if(!types[which].equals("Exit")){
-                        etSessionTitle.setText(types[which]);
+                    if (!types[which].equals("Exit")) {
+                        if(actionRequested.equals("select")){
+                            etSessionTitle.setText(types[which]);
+                        } else {
+                            deleteTopic(types[which]);
+                        }
                     }
-
                 }
             });
             b.show();
         } else {
             Toast.makeText(this, "No topics detected", Toast.LENGTH_SHORT).show();
         }
+    }
 
-=======
-    private void displayTopics() {
+    private void deleteTopic(String topic){
+       /* File myMainDir = getDir("logs", Context.MODE_PRIVATE);
+        File[] files = myMainDir.listFiles();
+        for (File inFile : files) {
+            if (inFile.isDirectory()) {
+                Log.i("INFO", inFile.getName());
+            }
+        }*/
+       Log.i( "INFO", "Code to delete: "+topic);
+    }
+
+
+   /* private void displayTopics() {
         AlertDialog.Builder b = new AlertDialog.Builder(this);
         b.setTitle("Choose Topic");
 
@@ -192,8 +209,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
         b.show();
->>>>>>> 7aee3e36f92007053e3d50353df1b21416e50fe7
-    }
+
+    }*/
 
     //Starts timer if not already started
     public void onStartClick(View view) {

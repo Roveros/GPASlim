@@ -14,10 +14,15 @@
         android:title="Select Topic" />
 
     <item
+        android:id="@+id/action_delete_topic"
+        android:orderInCategory="102"
+        android:title="Delete Topic" />
+
+   <!-- <item
         android:id="@+id/action_select_topic"
         android:orderInCategory="100"
         android:title="@string/action_select_topic"
-        app:showAsAction="never" />
+        app:showAsAction="never" /> -->
 
     <item
         android:id="@+id/action_email"
