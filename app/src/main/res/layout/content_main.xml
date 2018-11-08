@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.gpa.browne.gpaslim.MainActivity"
+    tools:context="com.gpa.browne.gpaslimrelease.MainActivity"
     tools:showIn="@layout/activity_main">
 
     <EditText

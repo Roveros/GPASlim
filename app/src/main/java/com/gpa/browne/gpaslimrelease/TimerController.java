@@ -1,4 +1,4 @@
-package com.gpa.browne.gpaslim;
+package com.gpa.browne.gpaslimrelease;
 
 import android.app.AlertDialog;
 import android.content.Context;

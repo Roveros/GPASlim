@@ -1,4 +1,4 @@
-package com.gpa.browne.gpaslim;
+package com.gpa.browne.gpaslimrelease;
 
 import org.junit.Test;
 

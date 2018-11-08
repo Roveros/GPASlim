@@ -1,4 +1,4 @@
-package com.gpa.browne.gpaslim;
+package com.gpa.browne.gpaslimrelease;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -32,7 +32,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
@@ -307,36 +306,45 @@ public class MainActivity extends AppCompatActivity {
         String generalData = prizeData + "¦" + prizeLog + "¦" + settings;
         Log.i("INFO-email", generalData);
 
+        if(topics!=null) {
+            for (String topic : topics) {
+                topicTitle = topic;
 
-        for (String topic : topics) {
-            topicTitle = topic;
+                if (TextUtils.isEmpty(badgeData)) {
+                    badgeData = badgeData + "NULL";
+                } else {
+                    badgeData = badgeData + "@" + "NULL";
+                }
 
-            if(TextUtils.isEmpty(badgeData)){
-                badgeData = badgeData + "NULL";
-            } else {
-                badgeData = badgeData + "@" + "NULL";
+                if (TextUtils.isEmpty(goalData)) {
+                    goalData = goalData + "NULL";
+                } else {
+                    goalData = goalData + "@" + "NULL";
+                }
+
+                if (TextUtils.isEmpty(logData)) {
+                    logData = logData + getLogData(topic);
+                } else {
+                    logData = logData + "@" + getLogData(topic);
+                }
+
+                String tempTopicData = topicTitle + "¦" + badgeData + "¦" + goalData + "¦" + logData;
+                Log.i("INFO-email", "TopicData: " + tempTopicData);
+
+                if (TextUtils.isEmpty(allTopicData)) {
+                    allTopicData = allTopicData + tempTopicData;
+                } else {
+                    allTopicData = allTopicData + "|" + tempTopicData;
+                }
             }
-
-            if(TextUtils.isEmpty(goalData)){
-                goalData = goalData + "NULL";
-            } else {
-                goalData = goalData + "@" + "NULL";
-            }
-
-            if(TextUtils.isEmpty(logData)){
-                logData = logData + getLogData(topic);
-            } else {
-                logData = logData + "@" + getLogData(topic);
-            }
-
+        } else { //if there are no saved topics
+            topicTitle = "nullTopic";
+            badgeData = badgeData + "NULL";
+            goalData = goalData + "NULL";
+            logData = logData + getLogData("nullLogData");
             String tempTopicData = topicTitle + "¦" + badgeData + "¦" + goalData + "¦" + logData;
             Log.i("INFO-email", "TopicData: " + tempTopicData);
-
-            if(TextUtils.isEmpty(allTopicData)){
-                allTopicData = allTopicData + tempTopicData;
-            } else {
-                allTopicData = allTopicData + "|" + tempTopicData;
-            }
+            allTopicData = allTopicData + tempTopicData;
         }
 
         if(TextUtils.isEmpty(badgeData)){

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@android:color/background_light"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.gpa.browne.gpaslim.SettingsActivity"
+    tools:context="com.gpa.browne.gpaslimrelease.SettingsActivity"
     tools:showIn="@layout/activity_settings">
 
     <TextView
